@@ -89,6 +89,27 @@ SELECT rating, COUNT(film_id) nb_film FROM film
 GROUP BY rating
 ORDER BY nb_film DESC;
 
+#2.Using the film table, determine:
+#2.1 The mean film duration for each rating, and sort the results 
+-- in descending order of the mean duration. Round off the average lengths to two decimal places. 
+-- This will help identify popular movie lengths for each category.
+SELECT rating, ROUND(AVG(length),2) AS `average duration` 
+FROM film
+GROUP BY rating 
+ORDER BY `average duration` DESC;
+
+#2.2 Identify which ratings have a mean duration of over two hours 
+-- in order to help select films for customers who prefer longer movies.
+SELECT rating, ROUND(AVG(length), 2) AS `average_duration`
+FROM film
+GROUP BY rating
+HAVING AVG(length) > 120
+ORDER BY `average_duration` DESC;
+
+#Bonus: determine which last names are not repeated in the table actor.
+SELECT last_name FROM actor
+GROUP BY last_name
+HAVING COUNT(actor_id)='1';
 
 
 
